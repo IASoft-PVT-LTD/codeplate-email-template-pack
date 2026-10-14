@@ -1,0 +1,75 @@
+{
+  "$comment": "Every email in emails/: its id (emails/<id>.mjml + emails/<id>.props.json), type (transactional: account and order emails people need; marketing: newsletters and announcements, which must carry an unsubscribe link), subject and preheader (the grey line after the subject in the inbox). Both may use the same {{data}} as the email.",
+  "emails": [
+    {
+      "id": "welcome",
+      "type": "transactional",
+      "subject": "Welcome to {{brand.name}}, {{user.firstName}}",
+      "preheader": "Three small steps to your first shared board, and where to find help.",
+      "about": "Sent right after sign-up."
+    },
+    {
+      "id": "verify-email",
+      "type": "transactional",
+      "subject": "Confirm your email address",
+      "preheader": "One click to confirm {{recipient.email}}. The link works for {{expiresInHours}} hours.",
+      "about": "Sent after sign-up or an email change; the account is limited until it's confirmed."
+    },
+    {
+      "id": "password-reset",
+      "type": "transactional",
+      "subject": "Reset your {{brand.name}} password",
+      "preheader": "Someone asked to reset your password. The link expires in {{expiresInMinutes}} minutes.",
+      "about": "Sent when someone asks for a password reset."
+    },
+    {
+      "id": "magic-link",
+      "type": "transactional",
+      "subject": "Your {{brand.name}} sign-in link",
+      "preheader": "Sign in with one click, or type the code {{code}}. Expires in {{expiresInMinutes}} minutes.",
+      "about": "Passwordless sign-in: a one-time link and code."
+    },
+    {
+      "id": "receipt",
+      "type": "transactional",
+      "subject": "Your receipt for {{money receipt.total receipt.currency}} ({{receipt.number}})",
+      "preheader": "Paid {{date receipt.paidAt}} with {{receipt.paymentMethod}}. Your invoice PDF is one click away.",
+      "about": "Sent after every successful payment: subscription renewals and one-off orders."
+    },
+    {
+      "id": "trial-ending",
+      "type": "transactional",
+      "subject": "Your trial ends in {{plural daysLeft \"day\" \"days\"}}",
+      "preheader": "Pick a plan to keep everything as it is. Nothing is deleted either way.",
+      "about": "Sent 3 days before a free trial ends."
+    },
+    {
+      "id": "order-shipped",
+      "type": "transactional",
+      "subject": "Your order {{order.number}} is on its way",
+      "preheader": "{{order.carrier}} expects to deliver it on {{date order.estimatedDelivery}}. Track it any time.",
+      "about": "Sent when a shop order leaves the warehouse."
+    },
+    {
+      "id": "team-invite",
+      "type": "transactional",
+      "subject": "{{inviter.name}} invited you to {{workspace.name}} on {{brand.name}}",
+      "preheader": "Join the workspace to see its boards. The invitation is valid for {{expiresInDays}} days.",
+      "about": "Sent when a workspace member invites someone by email."
+    },
+    {
+      "id": "newsletter",
+      "type": "marketing",
+      "subject": "{{issue.title}}",
+      "preheader": "{{issue.teaser}}",
+      "about": "The monthly newsletter: a lead story, two shorter ones and a tip."
+    },
+    {
+      "id": "product-update",
+      "type": "marketing",
+      "subject": "New in {{brand.name}}: {{feature.name}}",
+      "preheader": "{{feature.teaser}}",
+      "about": "A one-feature announcement to subscribers."
+    }
+  ]
+}

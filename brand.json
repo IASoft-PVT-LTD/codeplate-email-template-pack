@@ -1,0 +1,40 @@
+{
+  "name": "Pebblework",
+  "url": "https://pebblework.example",
+  "assetBaseUrl": "https://pebblework.example/email-assets/",
+  "logo": { "file": "logo.png", "width": 44, "height": 44, "alt": "Pebblework" },
+  "supportEmail": "help@pebblework.example",
+  "address": "Pebblework Ltd, 21 Harbour Lane, Bristol BS1 4XX, United Kingdom",
+  "lang": "en",
+  "dir": "ltr",
+  "locale": "en-GB",
+  "timeZone": "Europe/London",
+  "fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  "headingFontFamily": "Georgia, 'Times New Roman', Times, serif",
+  "width": 600,
+  "radius": 10,
+  "light": {
+    "page": "#f3f0ea",
+    "card": "#ffffff",
+    "text": "#1f2328",
+    "muted": "#5a636e",
+    "primary": "#2d5b4f",
+    "onPrimary": "#ffffff",
+    "accent": "#a8481f",
+    "border": "#e3ddd2",
+    "panel": "#f6f4ef",
+    "link": "#2d5b4f"
+  },
+  "dark": {
+    "page": "#121417",
+    "card": "#1c2026",
+    "text": "#eceff2",
+    "muted": "#a3acb6",
+    "primary": "#7cc6ae",
+    "onPrimary": "#0d1a16",
+    "accent": "#f0a17c",
+    "border": "#323942",
+    "panel": "#242a31",
+    "link": "#8fd6bf"
+  }
+}

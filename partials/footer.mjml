@@ -1,0 +1,20 @@
+{{!--
+  Below the card: why they got this email, where to get help, and the postal address.
+  Marketing emails (type "marketing" in emails.json) also get the unsubscribe link, which
+  the law in most countries and Gmail/Yahoo's sender rules require; the checks fail without it.
+--}}
+<mj-section background-color="{{brand.light.page}}" css-class="foot" padding="26px 0 36px">
+  <mj-column>
+    {{#if marketing}}
+    <mj-text mj-class="muted" padding="0 20px 10px">
+      You're getting this because you subscribed to {{brand.name}} news with {{recipient.email}}.
+      <a href="{{unsubscribeUrl}}" style="color:{{brand.light.link}};text-decoration:underline;">Unsubscribe</a>{{#if preferencesUrl}} or <a href="{{preferencesUrl}}" style="color:{{brand.light.link}};text-decoration:underline;">choose which emails you get</a>{{/if}}.
+    </mj-text>
+    {{else}}
+    <mj-text mj-class="muted" padding="0 20px 10px">
+      We sent this to {{recipient.email}} because of your {{brand.name}} account. Questions? Reply to this email or write to <a href="mailto:{{brand.supportEmail}}" style="color:{{brand.light.link}};text-decoration:underline;">{{brand.supportEmail}}</a>.
+    </mj-text>
+    {{/if}}
+    <mj-text mj-class="muted" padding="0 20px">{{brand.address}}</mj-text>
+  </mj-column>
+</mj-section>

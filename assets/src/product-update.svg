@@ -1,0 +1,25 @@
+<!-- Product update picture: a task card that repeats every week (CodePlate original). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1056 560" width="1056" height="560">
+  <rect width="1056" height="560" rx="20" fill="#e5efea"/>
+  <g transform="translate(150 120)">
+    <rect x="24" y="24" width="520" height="300" rx="22" fill="#c9ddd4"/>
+    <rect x="12" y="12" width="520" height="300" rx="22" fill="#d9e7e1"/>
+    <rect width="520" height="300" rx="22" fill="#ffffff"/>
+    <rect x="40" y="44" width="230" height="26" rx="13" fill="#1f2328"/>
+    <rect x="40" y="96" width="400" height="16" rx="8" fill="#c9cfd6"/>
+    <rect x="40" y="128" width="330" height="16" rx="8" fill="#c9cfd6"/>
+    <g transform="translate(40 190)">
+      <rect width="34" height="34" rx="9" fill="#2d5b4f"/>
+      <path d="M9 18 L15 24 L26 11" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <rect x="52" y="9" width="180" height="16" rx="8" fill="#c9cfd6"/>
+    </g>
+    <rect x="300" y="236" width="180" height="40" rx="20" fill="#f6e1d6"/>
+    <rect x="322" y="250" width="136" height="12" rx="6" fill="#a8481f"/>
+  </g>
+  <g transform="translate(790 300)" fill="none" stroke="#2d5b4f" stroke-width="22" stroke-linecap="round">
+    <path d="M -86 -20 A 90 90 0 0 1 70 -60"/>
+    <path d="M 86 20 A 90 90 0 0 1 -70 60"/>
+  </g>
+  <path d="M 846 206 L 884 248 L 828 262 Z" fill="#2d5b4f"/>
+  <path d="M 734 394 L 696 352 L 752 338 Z" fill="#2d5b4f"/>
+</svg>

@@ -1,0 +1,37 @@
+{
+  "recipient": { "email": "maya.okafor@example.com" },
+  "issue": {
+    "number": 18,
+    "date": "2026-10-14",
+    "title": "Plan less, finish more",
+    "teaser": "Why the best weekly plans fit on one screen, two small wins from readers, and a shortcut worth learning.",
+    "intro": "October is when half-finished plans pile up. This month: how small teams keep their week on one screen, and what two readers changed to get their Fridays back.",
+    "heroAlt": "Stacked pebbles balanced on a desk next to a weekly planner"
+  },
+  "lead": {
+    "title": "The one-screen week",
+    "summary": "We looked at 400 boards from teams of two to ten people. The teams that finished most of what they planned kept no more than twelve open tasks per person, and moved everything else to a 'Later' column on Monday morning.",
+    "url": "https://pebblework.example/blog/one-screen-week",
+    "cta": "Read the one-screen week"
+  },
+  "stories": [
+    {
+      "title": "Fridays without meetings",
+      "summary": "A six-person agency swapped their Friday stand-up for a ten-minute written check-in on their board.",
+      "url": "https://pebblework.example/blog/fridays-without-meetings"
+    },
+    {
+      "title": "A planner for the fridge",
+      "summary": "One reader prints her family's board every Sunday. Here's the print layout she uses.",
+      "url": "https://pebblework.example/blog/planner-for-the-fridge"
+    }
+  ],
+  "tip": {
+    "title": "press N anywhere",
+    "body": "Pressing N on any board opens a new task in the column you're looking at, with today's date already filled in."
+  },
+  "sender": "Priya, who writes The Pebble",
+  "signOff": "See you next month,",
+  "unsubscribeUrl": "https://pebblework.example/email/unsubscribe?u=4f2a9c",
+  "preferencesUrl": "https://pebblework.example/email/preferences?u=4f2a9c"
+}

@@ -1,0 +1,9 @@
+{
+  "recipient": { "email": "maya.okafor@example.com" },
+  "user": { "firstName": "Maya" },
+  "workspace": { "name": "Okafor Studio" },
+  "appUrl": "https://app.pebblework.example/w/okafor-studio",
+  "helpUrl": "https://pebblework.example/help/getting-started",
+  "sender": "Jonas, co-founder of Pebblework",
+  "signOff": "Happy planning,"
+}

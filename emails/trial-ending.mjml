@@ -1,0 +1,31 @@
+{{!-- Trial ending: sent 3 days before. Data: emails/trial-ending.props.json. Be plain about what happens either way. --}}
+<mj-section>
+  <mj-column>
+    <mj-text mj-class="h1"><h1 style="margin:0;font-size:30px;font-weight:400;">Your trial ends in {{plural daysLeft "day" "days"}}</h1></mj-text>
+    <mj-text>Hi {{user.firstName}}, your free trial of {{brand.name}} Team ends on <strong>{{date trialEndsAt}}</strong>. Here's what {{workspace.name}} has made so far:</mj-text>
+  </mj-column>
+</mj-section>
+<mj-section padding="10px 30px">
+  <mj-group>
+    <mj-column width="33.33%" padding="0 6px">
+      <mj-text container-background-color="{{brand.light.panel}}" css-class="ink panel" align="center" padding="16px 6px 0" font-size="28px" font-weight="700">{{usage.boards}}</mj-text>
+      <mj-text container-background-color="{{brand.light.panel}}" css-class="ink panel" align="center" padding="0 6px 16px" font-size="14px">boards</mj-text>
+    </mj-column>
+    <mj-column width="33.33%" padding="0 6px">
+      <mj-text container-background-color="{{brand.light.panel}}" css-class="ink panel" align="center" padding="16px 6px 0" font-size="28px" font-weight="700">{{usage.tasksDone}}</mj-text>
+      <mj-text container-background-color="{{brand.light.panel}}" css-class="ink panel" align="center" padding="0 6px 16px" font-size="14px">tasks done</mj-text>
+    </mj-column>
+    <mj-column width="33.33%" padding="0 6px">
+      <mj-text container-background-color="{{brand.light.panel}}" css-class="ink panel" align="center" padding="16px 6px 0" font-size="28px" font-weight="700">{{usage.members}}</mj-text>
+      <mj-text container-background-color="{{brand.light.panel}}" css-class="ink panel" align="center" padding="0 6px 16px" font-size="14px">people</mj-text>
+    </mj-column>
+  </mj-group>
+</mj-section>
+<mj-section>
+  <mj-column>
+    <mj-text padding="18px 36px 6px">Choose a plan to keep everything exactly as it is. Team is {{money plan.price plan.currency}} per person per month.</mj-text>
+    {{> button url=upgradeUrl label="Choose a plan"}}
+    <mj-text mj-class="muted">If you do nothing, {{workspace.name}} moves to the free plan on {{date trialEndsAt}}. Nothing is deleted: boards over the free limit become read-only until you upgrade.</mj-text>
+    {{> sign-off}}
+  </mj-column>
+</mj-section>

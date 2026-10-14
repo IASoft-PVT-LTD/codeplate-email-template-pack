@@ -1,0 +1,48 @@
+{
+  "$schema": "https://codeplate.io/schema/codeplate-0.json",
+  "spec": 0,
+  "id": "email-template-pack",
+  "name": "Email Template Pack",
+  "version": "1.0.0",
+  "kind": "document",
+  "summary": "Ten transactional and newsletter emails (MJML) with plain-text versions, dark mode, checks for Gmail's size limit, and screenshots.",
+  "tags": [
+    "email",
+    "newsletter",
+    "transactional-email",
+    "mjml",
+    "html-email",
+    "dark-mode",
+    "saas",
+    "marketing"
+  ],
+  "stack": [
+    {
+      "name": "mjml",
+      "version": "5.4.1"
+    },
+    {
+      "name": "handlebars",
+      "version": "4.7.10"
+    },
+    {
+      "name": "node",
+      "version": "22"
+    }
+  ],
+  "checks": {
+    "command": "npm ci && npm run check",
+    "requires": [
+      "node",
+      "browser"
+    ],
+    "budget": 90
+  },
+  "license": "CodePlate-Free-1.2",
+  "tier": "free",
+  "media": [
+    "docs/media/newsletter-light.png",
+    "docs/media/receipt-dark.png",
+    "docs/media/phone-sheet.png"
+  ]
+}

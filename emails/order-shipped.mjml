@@ -1,0 +1,38 @@
+{{!-- Shipping / order update. Data: emails/order-shipped.props.json --}}
+<mj-section>
+  <mj-column>
+    <mj-image src="{{asset "parcel.png"}}" alt="A parcel tied with string" width="120px" align="left" padding="30px 36px 0" />
+    <mj-text mj-class="h1" padding="14px 36px 10px"><h1 style="margin:0;font-size:30px;font-weight:400;">Your order is on its way</h1></mj-text>
+    <mj-text>Hi {{customer.firstName}}, order <strong>{{order.number}}</strong> left our workshop today. {{order.carrier}} expects to deliver it on <strong>{{date order.estimatedDelivery "full"}}</strong>.</mj-text>
+    {{> button url=order.trackingUrl label="Track your parcel"}}
+  </mj-column>
+</mj-section>
+<mj-section>
+  <mj-column>
+    <mj-table css-class="ink data" padding="8px 36px">
+      <tr style="text-align:left;">
+        <th scope="col" style="padding:8px 0;border-bottom:1px solid {{brand.light.border}};font-size:13px;white-space:nowrap;">In this parcel</th>
+        <th scope="col" style="padding:8px 0;border-bottom:1px solid {{brand.light.border}};font-size:13px;text-align:right;white-space:nowrap;">Qty</th>
+      </tr>
+      {{#each order.items}}
+      <tr>
+        <td style="padding:10px 12px 10px 0;border-bottom:1px solid {{@root.brand.light.border}};">{{name}}{{#if variant}}<br><span style="font-size:14px;">{{variant}}</span>{{/if}}</td>
+        <td style="padding:10px 0;border-bottom:1px solid {{@root.brand.light.border}};text-align:right;">{{quantity}}</td>
+      </tr>
+      {{/each}}
+    </mj-table>
+  </mj-column>
+</mj-section>
+<mj-section padding="12px 36px">
+  <mj-column mj-class="panel">
+    <mj-text padding="16px 22px 2px" font-size="14px"><strong>Delivering to</strong></mj-text>
+    <mj-text padding="2px 22px 2px" font-size="14px">{{customer.name}}<br>{{#each order.address}}{{this}}<br>{{/each}}</mj-text>
+    <mj-text padding="6px 22px 16px" font-size="14px"><strong>Tracking number</strong> {{order.trackingNumber}} ({{order.carrier}})</mj-text>
+  </mj-column>
+</mj-section>
+<mj-section>
+  <mj-column>
+    <mj-text mj-class="muted" padding="16px 36px 6px">Not home? {{order.carrier}} leaves a card and tries again the next working day. Something wrong with your order? Reply to this email within 30 days.</mj-text>
+    {{> sign-off}}
+  </mj-column>
+</mj-section>

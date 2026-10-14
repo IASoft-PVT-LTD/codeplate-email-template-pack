@@ -1,0 +1,5 @@
+{{!-- "Button not working?" with the full link, for security emails people must be able to finish. --}}
+<mj-text mj-class="muted" padding="4px 36px 6px">
+  Button not working? Paste this link into your browser:<br>
+  <a href="{{url}}" style="color:{{@root.brand.light.link}};word-break:break-all;">{{url}}</a>
+</mj-text>

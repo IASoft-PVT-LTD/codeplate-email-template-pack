@@ -1,0 +1,11 @@
+<!-- A parcel tied with string (CodePlate original), for the order-shipped email. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <ellipse cx="120" cy="206" rx="86" ry="12" fill="#000" opacity="0.12"/>
+  <path d="M40 92 L120 62 L200 92 L200 182 L120 212 L40 182 Z" fill="#c8955a"/>
+  <path d="M40 92 L120 122 L120 212 L40 182 Z" fill="#b47f45"/>
+  <path d="M120 122 L200 92 L200 182 L120 212 Z" fill="#d6a76c"/>
+  <path d="M40 92 L120 62 L200 92 L120 122 Z" fill="#e2b67e"/>
+  <path d="M80 77 L160 107 L160 197" fill="none" stroke="#f3f0ea" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M160 77 L80 107 L80 197" fill="none" stroke="#efe9de" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M120 92 C 98 60, 84 70, 104 88 M120 92 C 142 60, 156 70, 136 88" fill="none" stroke="#2d5b4f" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://codeplate.io/schema/assets-0.json",
+  "assets": [
+    {
+      "path": "assets/images/logo.png",
+      "kind": "image",
+      "width": 88,
+      "height": 88,
+      "use": "The logo mark in every email's header, shown at 44x44 (brand.json logo). Drawn from assets/src/logo.svg by `npm run images`. Replace it with the user's mark: a square PNG at twice the size it's shown, readable on light and dark backgrounds.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/src/logo.svg",
+      "kind": "image",
+      "width": 88,
+      "height": 88,
+      "use": "Source of assets/images/logo.png (the sample Pebblework mark). Emails never use the SVG itself: most mail apps don't show SVG.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/images/newsletter-hero.png",
+      "kind": "image",
+      "width": 1200,
+      "height": 546,
+      "use": "The newsletter's header picture, shown 600x273 across the top of the card. Drawn from assets/src/newsletter-hero.svg.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/src/newsletter-hero.svg",
+      "kind": "image",
+      "width": 1200,
+      "height": 546,
+      "use": "Source of assets/images/newsletter-hero.png: pebbles balanced next to a weekly planner.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/images/product-update.png",
+      "kind": "image",
+      "width": 1056,
+      "height": 560,
+      "use": "The product-update email's picture, shown 528x280 inside the card. Drawn from assets/src/product-update.svg.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/src/product-update.svg",
+      "kind": "image",
+      "width": 1056,
+      "height": 560,
+      "use": "Source of assets/images/product-update.png: a task card that repeats every week.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/images/parcel.png",
+      "kind": "image",
+      "width": 240,
+      "height": 240,
+      "use": "The parcel in the order-shipped email, shown 120x120 on a transparent background (it sits on the card in light and dark mode). Drawn from assets/src/parcel.svg.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    },
+    {
+      "path": "assets/src/parcel.svg",
+      "kind": "image",
+      "width": 240,
+      "height": 240,
+      "use": "Source of assets/images/parcel.png: a parcel tied with string.",
+      "license": "CodePlate-original",
+      "credit": "CodePlate"
+    }
+  ]
+}

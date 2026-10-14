@@ -1,0 +1,22 @@
+{{!-- Team invite. Data: emails/team-invite.props.json. "message" (the inviter's own note) is optional. --}}
+<mj-section>
+  <mj-column>
+    <mj-text mj-class="h1"><h1 style="margin:0;font-size:30px;font-weight:400;">Join {{workspace.name}} on {{brand.name}}</h1></mj-text>
+    <mj-text><strong>{{inviter.name}}</strong> ({{inviter.email}}) invited you to plan together in the <strong>{{workspace.name}}</strong> workspace, with {{plural workspace.memberCount "other person" "other people"}}.</mj-text>
+  </mj-column>
+</mj-section>
+{{#if message}}
+<mj-section padding="8px 36px">
+  <mj-column mj-class="panel" border-left="4px solid {{brand.light.primary}}">
+    <mj-text padding="16px 22px" font-style="italic">“{{message}}”</mj-text>
+  </mj-column>
+</mj-section>
+{{/if}}
+<mj-section>
+  <mj-column>
+    {{> button url=acceptUrl label="Accept the invitation"}}
+    {{> fallback-link url=acceptUrl}}
+    <mj-text mj-class="muted" padding="14px 36px 6px">The invitation is valid for {{expiresInDays}} days. If you don't know {{inviter.name}}, ignore this email and nothing will happen.</mj-text>
+    {{> sign-off}}
+  </mj-column>
+</mj-section>

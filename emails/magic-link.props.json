@@ -1,0 +1,7 @@
+{
+  "recipient": { "email": "maya.okafor@example.com" },
+  "signInUrl": "https://app.pebblework.example/auth/link?token=9b8e2f04",
+  "code": "482 917",
+  "expiresInMinutes": 10,
+  "requestedAt": "2026-10-14T09:05:00Z"
+}

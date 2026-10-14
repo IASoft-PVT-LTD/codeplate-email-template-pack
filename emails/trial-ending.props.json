@@ -1,0 +1,10 @@
+{
+  "recipient": { "email": "maya.okafor@example.com" },
+  "user": { "firstName": "Maya" },
+  "workspace": { "name": "Okafor Studio" },
+  "daysLeft": 3,
+  "trialEndsAt": "2026-10-17",
+  "usage": { "boards": 6, "tasksDone": 148, "members": 4 },
+  "plan": { "price": 900, "currency": "GBP" },
+  "upgradeUrl": "https://app.pebblework.example/billing/plans"
+}
