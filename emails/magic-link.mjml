@@ -1,0 +1,20 @@
+{{!-- Passwordless sign-in: a link and the same code to type. Data: emails/magic-link.props.json --}}
+<mj-section>
+  <mj-column>
+    <mj-text mj-class="h1"><h1 style="margin:0;font-size:30px;font-weight:400;">Sign in to {{brand.name}}</h1></mj-text>
+    <mj-text>Use the button to sign in on this device. It works once, for the next {{expiresInMinutes}} minutes.</mj-text>
+    {{> button url=signInUrl label="Sign in on this device"}}
+    <mj-text padding="12px 36px 4px">Signing in on another device? Type this code instead:</mj-text>
+  </mj-column>
+</mj-section>
+<mj-section padding="6px 36px">
+  <mj-column mj-class="panel">
+    <mj-text align="center" padding="18px 22px" font-size="30px" font-weight="700" css-class="ink h-code">{{code}}</mj-text>
+  </mj-column>
+</mj-section>
+<mj-section>
+  <mj-column>
+    <mj-text mj-class="muted" padding="18px 36px 6px">You asked to sign in at {{date requestedAt "datetime"}}. If that wasn't you, ignore this email; nobody can sign in without the link or the code.</mj-text>
+    {{> sign-off}}
+  </mj-column>
+</mj-section>

@@ -1,0 +1,28 @@
+{{!-- One-feature announcement. Data: emails/product-update.props.json. Type "marketing": unsubscribe link in the footer. --}}
+<mj-section>
+  <mj-column>
+    <mj-text mj-class="eyebrow">NEW IN {{brand.name}}</mj-text>
+    <mj-text mj-class="h1"><h1 style="margin:0;font-size:30px;font-weight:400;">{{feature.headline}}</h1></mj-text>
+    <mj-text>{{feature.intro}}</mj-text>
+    <mj-image src="{{asset "product-update.png"}}" alt="{{feature.imageAlt}}" width="528px" padding="18px 36px" border-radius="{{brand.radius}}px" />
+    <mj-text padding="4px 36px">
+      <ul style="margin:0;padding:0 0 0 20px;">
+        {{#each feature.points}}
+        <li style="margin:0 0 10px;">{{this}}</li>
+        {{/each}}
+      </ul>
+    </mj-text>
+    {{> button url=feature.url label=feature.cta}}
+    <mj-divider />
+    <mj-text mj-class="h2" padding="4px 36px 4px"><h2 style="margin:0;font-size:19px;font-weight:400;">Also improved</h2></mj-text>
+    <mj-text font-size="15px">
+      <ul style="margin:0;padding:0 0 0 20px;">
+        {{#each alsoImproved}}
+        <li style="margin:0 0 8px;">{{this}}</li>
+        {{/each}}
+      </ul>
+    </mj-text>
+    <mj-text mj-class="muted">Full details are in the <a href="{{changelogUrl}}" style="color:{{brand.light.link}};">changelog</a>.</mj-text>
+    {{> sign-off}}
+  </mj-column>
+</mj-section>

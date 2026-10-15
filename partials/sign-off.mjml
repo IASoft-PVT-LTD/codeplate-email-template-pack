@@ -1,0 +1,2 @@
+{{!-- The closing line and the sender's name. --}}
+<mj-text padding="18px 36px 34px">{{#if signOff}}{{signOff}}{{else}}Thanks,{{/if}}<br>{{#if sender}}{{sender}}{{else}}The {{@root.brand.name}} team{{/if}}</mj-text>

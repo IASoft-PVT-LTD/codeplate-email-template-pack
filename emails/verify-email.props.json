@@ -1,0 +1,6 @@
+{
+  "recipient": { "email": "maya.okafor@example.com" },
+  "user": { "firstName": "Maya" },
+  "verifyUrl": "https://app.pebblework.example/verify?token=6f1c0b2e9a7d4c3b",
+  "expiresInHours": 24
+}

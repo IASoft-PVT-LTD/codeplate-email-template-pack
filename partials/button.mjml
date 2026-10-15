@@ -1,0 +1,7 @@
+{{!--
+  A call-to-action button: {{> button url=resetUrl label="Choose a new password"}}
+  Keep labels short and specific (what happens when they click), never "Click here".
+  The link is also printed under the button for clients that block styles, and it shows in
+  the plain-text version.
+--}}
+<mj-button href="{{url}}">{{label}}</mj-button>

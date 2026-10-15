@@ -1,0 +1,22 @@
+{{!-- Welcome: sent right after sign-up. Data: emails/welcome.props.json --}}
+<mj-section>
+  <mj-column>
+    <mj-text mj-class="eyebrow">WELCOME</mj-text>
+    <mj-text mj-class="h1"><h1 style="margin:0;font-size:30px;font-weight:400;">Welcome aboard, {{user.firstName}}</h1></mj-text>
+    <mj-text>Your workspace <strong>{{workspace.name}}</strong> is ready. {{brand.name}} works best when the whole team plans in one place, so here are three small steps to get there.</mj-text>
+  </mj-column>
+</mj-section>
+<mj-section padding="10px 36px">
+  <mj-column mj-class="panel">
+    <mj-text padding="18px 22px 4px"><strong>1. Make your first board.</strong> Start from a template (weekly plan, launch checklist, content calendar) or a blank page.</mj-text>
+    <mj-text padding="4px 22px"><strong>2. Invite your team.</strong> Everyone you invite joins {{workspace.name}} for free during your trial.</mj-text>
+    <mj-text padding="4px 22px 18px"><strong>3. Add a due date.</strong> {{brand.name}} sends one tidy summary each morning instead of a ping per task.</mj-text>
+  </mj-column>
+</mj-section>
+<mj-section>
+  <mj-column>
+    {{> button url=appUrl label="Open your workspace"}}
+    <mj-text>Stuck on anything? The <a href="{{helpUrl}}" style="color:{{brand.light.link}};">getting-started guide</a> takes five minutes, and you can reply to this email to reach a real person.</mj-text>
+    {{> sign-off}}
+  </mj-column>
+</mj-section>

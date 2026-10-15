@@ -1,0 +1,42 @@
+{{!--
+  The monthly newsletter. Data: emails/newsletter.props.json. Type "marketing" in emails.json:
+  the footer adds the unsubscribe link, and renderEmail returns List-Unsubscribe headers.
+  "Also this month" is two columns side by side that stack on phones.
+--}}
+<mj-section padding="0">
+  <mj-column>
+    <mj-image src="{{asset "newsletter-hero.png"}}" alt="{{issue.heroAlt}}" css-class="text-skip" width="600px" padding="0" border-radius="{{brand.radius}}px {{brand.radius}}px 0 0" href="{{lead.url}}" />
+  </mj-column>
+</mj-section>
+<mj-section>
+  <mj-column>
+    <mj-text mj-class="eyebrow">THE PEBBLE · ISSUE {{issue.number}} · {{date issue.date}}</mj-text>
+    <mj-text mj-class="h1"><h1 style="margin:0;font-size:30px;font-weight:400;">{{issue.title}}</h1></mj-text>
+    <mj-text>{{issue.intro}}</mj-text>
+    <mj-text mj-class="h2"><h2 style="margin:0;font-size:21px;font-weight:400;">{{lead.title}}</h2></mj-text>
+    <mj-text>{{lead.summary}}</mj-text>
+    {{> button url=lead.url label=lead.cta}}
+    <mj-divider padding="10px 36px 0" />
+    <mj-text mj-class="eyebrow" padding="22px 36px 0">ALSO THIS MONTH</mj-text>
+  </mj-column>
+</mj-section>
+<mj-section padding="0 18px">
+  {{#each stories}}
+  <mj-column>
+    <mj-text mj-class="h2" padding="12px 18px 2px"><h2 style="margin:0;font-size:19px;font-weight:400;">{{title}}</h2></mj-text>
+    <mj-text padding="4px 18px" font-size="15px">{{summary}}</mj-text>
+    <mj-text padding="4px 18px 12px" font-size="15px"><a href="{{url}}" style="color:{{@root.brand.light.link}};font-weight:600;">Read: {{title}}</a></mj-text>
+  </mj-column>
+  {{/each}}
+</mj-section>
+<mj-section padding="16px 36px 0">
+  <mj-column mj-class="panel">
+    <mj-text padding="18px 22px 2px"><strong>Tip: {{tip.title}}</strong></mj-text>
+    <mj-text padding="2px 22px 18px" font-size="15px">{{tip.body}}</mj-text>
+  </mj-column>
+</mj-section>
+<mj-section>
+  <mj-column>
+    {{> sign-off}}
+  </mj-column>
+</mj-section>

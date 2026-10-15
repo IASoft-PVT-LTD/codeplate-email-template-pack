@@ -1,0 +1,41 @@
+<!-- Newsletter header picture: pebbles balanced next to a weekly planner (CodePlate original). -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 546" width="1200" height="546">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dfe9e4"/>
+      <stop offset="1" stop-color="#c9ddd4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="546" fill="url(#sky)"/>
+  <circle cx="1010" cy="120" r="70" fill="#f0a17c" opacity="0.85"/>
+  <rect y="390" width="1200" height="156" fill="#2d5b4f"/>
+  <rect y="390" width="1200" height="10" fill="#244b41"/>
+  <g transform="translate(160 150) rotate(-4)">
+    <rect width="420" height="280" rx="14" fill="#f8f5ef"/>
+    <rect width="420" height="56" rx="14" fill="#a8481f"/>
+    <rect y="40" width="420" height="16" fill="#a8481f"/>
+    <g fill="none" stroke="#d8d1c3" stroke-width="3">
+      <path d="M84 56 V280 M168 56 V280 M252 56 V280 M336 56 V280"/>
+      <path d="M0 130 H420 M0 205 H420"/>
+    </g>
+    <g fill="#7cc6ae">
+      <rect x="12" y="72" width="60" height="16" rx="8"/>
+      <rect x="96" y="96" width="60" height="16" rx="8"/>
+      <rect x="180" y="148" width="60" height="16" rx="8"/>
+      <rect x="264" y="72" width="60" height="16" rx="8"/>
+      <rect x="348" y="222" width="60" height="16" rx="8"/>
+    </g>
+    <g fill="#f0a17c">
+      <rect x="12" y="148" width="60" height="16" rx="8"/>
+      <rect x="264" y="222" width="60" height="16" rx="8"/>
+    </g>
+  </g>
+  <g transform="translate(820 0)">
+    <ellipse cx="120" cy="388" rx="120" ry="38" fill="#e9e2d4"/>
+    <ellipse cx="114" cy="318" rx="92" ry="34" fill="#cfc4b1"/>
+    <ellipse cx="124" cy="258" rx="66" ry="27" fill="#f3f0ea"/>
+    <ellipse cx="118" cy="211" rx="42" ry="20" fill="#f0a17c"/>
+    <ellipse cx="96" cy="300" rx="30" ry="8" fill="#ffffff" opacity="0.35"/>
+    <ellipse cx="108" cy="246" rx="22" ry="6" fill="#ffffff" opacity="0.5"/>
+  </g>
+</svg>

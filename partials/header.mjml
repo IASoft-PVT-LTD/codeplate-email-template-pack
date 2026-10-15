@@ -1,0 +1,8 @@
+{{!-- The brand bar above the card: the logo (decorative, so the name next to it is what's read) and the name. --}}
+<mj-section background-color="{{brand.light.page}}" css-class="head" padding="28px 0 18px">
+  <mj-column>
+    <mj-text padding="0 20px" css-class="ink" font-size="20px" font-weight="700" line-height="44px">
+      <a href="{{brand.url}}" style="color:{{brand.light.text}};text-decoration:none;"><img src="{{asset brand.logo.file}}" width="{{brand.logo.width}}" height="{{brand.logo.height}}" alt="" role="presentation" style="display:inline-block;vertical-align:middle;border:0;border-radius:{{brand.radius}}px;"><span style="vertical-align:middle;padding-left:12px;color:{{brand.light.text}};">{{brand.name}}</span></a>
+    </mj-text>
+  </mj-column>
+</mj-section>

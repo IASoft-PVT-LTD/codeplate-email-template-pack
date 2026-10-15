@@ -1,0 +1,25 @@
+{
+  "recipient": { "email": "maya.okafor@example.com" },
+  "feature": {
+    "name": "recurring tasks",
+    "teaser": "Set a task to come back every week, month or on the last Friday, and stop copying the same checklist by hand.",
+    "headline": "Recurring tasks are here",
+    "intro": "The most-requested feature of the year: tasks that come back on their own. Set it once and the next copy appears when you finish this one.",
+    "imageAlt": "A task card with a circular arrow showing it repeats every week",
+    "points": [
+      "Every day, week, month, or a pattern like \"the last Friday of the month\".",
+      "Checklists and assignees carry over; comments start fresh.",
+      "Skip one occurrence without breaking the series."
+    ],
+    "url": "https://app.pebblework.example/whats-new/recurring-tasks",
+    "cta": "Try recurring tasks"
+  },
+  "alsoImproved": [
+    "Boards with 500+ tasks open twice as fast.",
+    "The morning summary email skips days with nothing due."
+  ],
+  "changelogUrl": "https://pebblework.example/changelog",
+  "sender": "The Pebblework team",
+  "unsubscribeUrl": "https://pebblework.example/email/unsubscribe?u=4f2a9c",
+  "preferencesUrl": "https://pebblework.example/email/preferences?u=4f2a9c"
+}

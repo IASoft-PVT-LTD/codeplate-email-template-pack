@@ -1,0 +1,55 @@
+{{!--
+  Receipt / invoice. Data: emails/receipt.props.json. Amounts are whole minor units (pence,
+  cents) formatted with {{money amount currency}}; work totals out in your billing code, never here.
+  The line items are a real data table (css-class "ink data"): it keeps its <th> headers for
+  screen readers and comes out as aligned columns in the plain-text version.
+--}}
+<mj-section>
+  <mj-column>
+    <mj-text mj-class="eyebrow">RECEIPT {{receipt.number}}</mj-text>
+    <mj-text mj-class="h1"><h1 style="margin:0;font-size:30px;font-weight:400;">Thanks for your payment</h1></mj-text>
+    <mj-text>Hi {{customer.firstName}}, we received {{money receipt.total receipt.currency}} for {{receipt.description}}. Keep this email for your records; the invoice PDF is linked below.</mj-text>
+  </mj-column>
+</mj-section>
+<mj-section padding="8px 36px">
+  <mj-column mj-class="panel">
+    <mj-text padding="16px 22px 2px" font-size="14px"><strong>Paid</strong> {{date receipt.paidAt}}</mj-text>
+    <mj-text padding="2px 22px" font-size="14px"><strong>Payment method</strong> {{receipt.paymentMethod}}</mj-text>
+    <mj-text padding="2px 22px 16px" font-size="14px"><strong>Billed to</strong> {{customer.billingName}}, {{customer.address}}</mj-text>
+  </mj-column>
+</mj-section>
+<mj-section>
+  <mj-column>
+    <mj-table css-class="ink data" padding="18px 36px 8px">
+      <tr style="text-align:left;">
+        <th scope="col" style="padding:8px 0;border-bottom:1px solid {{brand.light.border}};font-size:13px;white-space:nowrap;">Item</th>
+        <th scope="col" style="padding:8px 0;border-bottom:1px solid {{brand.light.border}};font-size:13px;text-align:right;white-space:nowrap;">Qty</th>
+        <th scope="col" style="padding:8px 0;border-bottom:1px solid {{brand.light.border}};font-size:13px;text-align:right;white-space:nowrap;">Amount</th>
+      </tr>
+      {{#each receipt.items}}
+      <tr>
+        <td style="padding:10px 12px 10px 0;border-bottom:1px solid {{@root.brand.light.border}};">{{description}}</td>
+        <td style="padding:10px 0;border-bottom:1px solid {{@root.brand.light.border}};text-align:right;">{{quantity}}</td>
+        <td style="padding:10px 0;border-bottom:1px solid {{@root.brand.light.border}};text-align:right;white-space:nowrap;">{{money amount @root.receipt.currency}}</td>
+      </tr>
+      {{/each}}
+      <tr>
+        <td colspan="2" style="padding:10px 0 2px;text-align:right;">Subtotal</td>
+        <td style="padding:10px 0 2px;text-align:right;white-space:nowrap;">{{money receipt.subtotal receipt.currency}}</td>
+      </tr>
+      {{#if receipt.tax}}
+      <tr>
+        <td colspan="2" style="padding:2px 0;text-align:right;">{{receipt.taxLabel}}</td>
+        <td style="padding:2px 0;text-align:right;white-space:nowrap;">{{money receipt.tax receipt.currency}}</td>
+      </tr>
+      {{/if}}
+      <tr>
+        <td colspan="2" style="padding:8px 0;text-align:right;font-weight:700;">Total paid</td>
+        <td style="padding:8px 0;text-align:right;font-weight:700;white-space:nowrap;">{{money receipt.total receipt.currency}}</td>
+      </tr>
+    </mj-table>
+    {{> button url=invoiceUrl label="Download the invoice (PDF)"}}
+    <mj-text mj-class="muted">Need a different company name or a VAT number on the invoice? Update your <a href="{{billingUrl}}" style="color:{{brand.light.link}};">billing details</a> and we'll reissue it.</mj-text>
+    {{> sign-off}}
+  </mj-column>
+</mj-section>

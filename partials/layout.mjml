@@ -1,0 +1,61 @@
+{{!--
+  The frame every email shares: <head> (meta tags, dark mode, the brand's default styles),
+  the header, your email's sections ({{> @partial-block}}), and the footer.
+  Colours, fonts and sizes come from brand.json ({{brand.light.text}}, {{brand.dark.text}}, ...).
+  Rules: styles that must survive Gmail go on the components (they are inlined); the <mj-style>
+  block below only adds dark mode and small-screen tweaks, which clients without <style>
+  support simply skip.
+--}}
+<mjml lang="{{brand.lang}}" dir="{{brand.dir}}">
+  <mj-head>
+    <mj-title>{{subject}}</mj-title>
+    <mj-preview>{{preheader}}</mj-preview>
+    <mj-raw>
+      <meta name="color-scheme" content="light dark">
+      <meta name="supported-color-schemes" content="light dark">
+      <meta name="x-apple-disable-message-reformatting">
+      <meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no">
+    </mj-raw>
+    <mj-attributes>
+      <mj-all font-family="{{{brand.fontFamily}}}" />
+      <mj-section background-color="{{brand.light.card}}" css-class="card" padding="0" />
+      <mj-column padding="0" />
+      <mj-text color="{{brand.light.text}}" font-size="16px" line-height="1.6" padding="6px 36px" css-class="ink" />
+      <mj-button background-color="{{brand.light.primary}}" color="{{brand.light.onPrimary}}" font-size="16px" font-weight="600" line-height="1.25" border-radius="{{brand.radius}}px" inner-padding="14px 28px" padding="18px 36px" align="left" css-class="btn" />
+      <mj-divider border-color="{{brand.light.border}}" border-width="1px" padding="18px 36px" css-class="rule" />
+      <mj-image padding="0 36px" />
+      <mj-table color="{{brand.light.text}}" font-size="15px" line-height="1.5" padding="8px 36px" css-class="ink" />
+      <mj-class name="h1" font-family="{{{brand.headingFontFamily}}}" font-size="30px" line-height="1.25" padding="34px 36px 10px" />
+      <mj-class name="h2" font-family="{{{brand.headingFontFamily}}}" font-size="21px" line-height="1.3" padding="22px 36px 4px" />
+      <mj-class name="muted" color="{{brand.light.muted}}" font-size="14px" line-height="1.55" css-class="muted" />
+      <mj-class name="panel" background-color="{{brand.light.panel}}" border-radius="{{brand.radius}}px" css-class="panel" />
+      <mj-class name="eyebrow" color="{{brand.light.accent}}" font-size="13px" font-weight="700" letter-spacing="1.5px" padding="34px 36px 0" css-class="eyebrow" />
+    </mj-attributes>
+    <mj-style>
+      :root { color-scheme: light dark; supported-color-schemes: light dark; }
+      .ink a { color: {{brand.light.link}}; }
+      .h-code { font-family: Menlo, Consolas, 'Courier New', monospace; letter-spacing: 6px; }
+      @media (max-width: 479px) {
+        .ink > div, .muted > div { padding-left: 0 !important; padding-right: 0 !important; }
+      }
+      @media (prefers-color-scheme: dark) {
+        .page, .page > div, .head, .head table, .head td, .foot, .foot table, .foot td { background-color: {{brand.dark.page}} !important; }
+        .card, .card table, .card td { background-color: {{brand.dark.card}} !important; }
+        .panel, .panel table, .panel td { background-color: {{brand.dark.panel}} !important; }
+        .ink div, .ink td, .ink th, .ink p, .ink h1, .ink h2, .ink h3, .ink li, .ink span, .ink strong { color: {{brand.dark.text}} !important; }
+        .ink a { color: {{brand.dark.link}} !important; }
+        .ink td, .ink th { border-color: {{brand.dark.border}} !important; }
+        .muted div, .muted span, .muted td { color: {{brand.dark.muted}} !important; }
+        .muted a { color: {{brand.dark.link}} !important; }
+        .eyebrow div { color: {{brand.dark.accent}} !important; }
+        .btn td, .btn a { background-color: {{brand.dark.primary}} !important; background: {{brand.dark.primary}} !important; color: {{brand.dark.onPrimary}} !important; }
+        .rule p { border-top-color: {{brand.dark.border}} !important; }
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="{{brand.light.page}}" width="{{brand.width}}px" css-class="page">
+    {{> header}}
+    {{> @partial-block}}
+    {{> footer}}
+  </mj-body>
+</mjml>

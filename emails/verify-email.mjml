@@ -1,0 +1,12 @@
+{{!-- Verify email: sent after sign-up or an email change. Data: emails/verify-email.props.json --}}
+<mj-section>
+  <mj-column>
+    <mj-text mj-class="h1"><h1 style="margin:0;font-size:30px;font-weight:400;">Confirm your email address</h1></mj-text>
+    <mj-text>Hi {{user.firstName}}, please confirm that <strong>{{recipient.email}}</strong> is your address. Until you do, we can't send you reminders or password resets.</mj-text>
+    {{> button url=verifyUrl label="Confirm my email address"}}
+    {{> fallback-link url=verifyUrl}}
+    <mj-divider />
+    <mj-text mj-class="muted">This link works for {{expiresInHours}} hours. If you didn't create a {{brand.name}} account, you can ignore this email: nothing happens without the click.</mj-text>
+    {{> sign-off}}
+  </mj-column>
+</mj-section>

@@ -1,0 +1,8 @@
+{
+  "recipient": { "email": "lena.fischer@example.com" },
+  "inviter": { "name": "Maya Okafor", "email": "maya.okafor@example.com" },
+  "workspace": { "name": "Okafor Studio", "memberCount": 4 },
+  "message": "Lena, this is where we plan the spring catalogue. Your board is called Photo shoots.",
+  "acceptUrl": "https://app.pebblework.example/invite/7d1e5c90",
+  "expiresInDays": 7
+}

@@ -1,0 +1,21 @@
+{
+  "recipient": { "email": "accounts@okafor-studio.example" },
+  "customer": { "firstName": "Maya", "billingName": "Okafor Studio Ltd", "address": "4 Mill Yard, Leeds LS2 7HF, United Kingdom" },
+  "receipt": {
+    "number": "PW-2026-1048",
+    "description": "your Team plan, October 2026",
+    "paidAt": "2026-10-14",
+    "paymentMethod": "Visa ending 4242",
+    "currency": "GBP",
+    "items": [
+      { "description": "Team plan, 5 seats (14 Oct to 13 Nov 2026)", "quantity": 5, "amount": 4500 },
+      { "description": "Extra storage, 50 GB", "quantity": 1, "amount": 400 }
+    ],
+    "subtotal": 4900,
+    "taxLabel": "VAT 20%",
+    "tax": 980,
+    "total": 5880
+  },
+  "invoiceUrl": "https://app.pebblework.example/billing/invoices/PW-2026-1048.pdf",
+  "billingUrl": "https://app.pebblework.example/billing"
+}

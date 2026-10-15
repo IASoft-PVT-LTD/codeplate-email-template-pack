@@ -1,0 +1,16 @@
+{
+  "recipient": { "email": "sam.reyes@example.com" },
+  "customer": { "firstName": "Sam", "name": "Sam Reyes" },
+  "order": {
+    "number": "PW-SHOP-3317",
+    "carrier": "Royal Mail Tracked 48",
+    "trackingNumber": "QA 1234 5678 9GB",
+    "trackingUrl": "https://pebblework.example/track/PW-SHOP-3317",
+    "estimatedDelivery": "2026-10-16",
+    "address": ["9 Orchard Row", "Bath BA1 2QT", "United Kingdom"],
+    "items": [
+      { "name": "Pebblework Weekly Planner 2027", "variant": "A5, sage linen cover", "quantity": 1 },
+      { "name": "Task pads, pack of 3", "quantity": 2 }
+    ]
+  }
+}
