@@ -1,6 +1,6 @@
 # Email Template Pack
 
-> **Free CodePlate template, v1.0.1.** This repository mirrors the zip on [codeplate.io](https://codeplate.io/t/email-template-pack/).
+> **Free CodePlate template, v1.0.2.** This repository mirrors the zip on [codeplate.io](https://codeplate.io/t/email-template-pack/).
 > Press **Use this template** to start your own repository from it, or [download the zip](https://codeplate.io/t/email-template-pack/).
 > [All templates](https://codeplate.io/) · [Free License](https://codeplate.io/license/free/) · subscribers get it under the [Pro License](https://codeplate.io/license/pro/) with no credit.
 
@@ -52,6 +52,10 @@ const email = await renderEmail('password-reset', {
 ## What the checks can't see
 
 They measure the email's own dark mode (as Apple Mail and other apps that support it show it), but Gmail and Outlook.com recolour emails in their own way. They reject the CSS Outlook for Windows can't handle, but don't run Outlook. They can't judge deliverability (that depends on your domain's SPF, DKIM and DMARC and your list). Before a big send, open the `.eml` files in the mail apps you have, send yourself a test, and consider a paid preview service such as Litmus or Email on Acid.
+
+## How this template was made
+
+This template was written largely by AI coding agents (Claude, by Anthropic). IASoft reviewed and tested the work. The template's checks run on every change.
 
 ## License
 
