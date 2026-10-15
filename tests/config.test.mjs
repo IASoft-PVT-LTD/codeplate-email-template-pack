@@ -48,3 +48,10 @@ test('the .eml preview carries text, HTML and the pictures inline', () => {
   const htmlPart = eml.split('Content-Type: text/html; charset=utf-8\r\nContent-Transfer-Encoding: base64\r\n\r\n')[1].split('\r\n--')[0];
   assert.match(Buffer.from(htmlPart.replace(/\r\n/g, ''), 'base64').toString('utf8'), /src="cid:img1\.t@preview"/);
 });
+
+test('brand.json signOff and sender are optional text', () => {
+  const { brand } = makeProject();
+  assert.deepEqual(checkBrand({ ...brand, signOff: 'Cheers,', sender: 'The workshop' }), []);
+  assert.match(checkBrand({ ...brand, sender: 42 }).join('\n'), /"sender" must be text/);
+  assert.match(checkBrand({ ...brand, signOff: ' ' }).join('\n'), /"signOff" must be text/);
+});

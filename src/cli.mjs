@@ -7,7 +7,7 @@
 //   npm run new-email -- <id> [--marketing]   a new email: emails/<id>.mjml, .props.json, emails.json
 //   npm run render -- <id> --data f.json      one email with other data → out/render/
 //   npm run browser                  which browser the previews and checks use
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { buildAll } from './build.mjs';
 import { checkProject } from './config.mjs';
@@ -16,6 +16,7 @@ import { renderImages } from './images.mjs';
 import { clearShots, inspectEmails } from './inspect.mjs';
 import { checkHtml, checkMeta, checkText } from './lint.mjs';
 import { browserPath } from './browser.mjs';
+import { newEmail } from './new-email.mjs';
 import { loadBrand, renderEmail, ROOT } from './render.mjs';
 
 const [cmd, ...args] = process.argv.slice(2);
@@ -61,8 +62,16 @@ if (cmd === 'build') {
   if (!ids.length) clearShots(ROOT);
   const { reports, shots } = await inspectEmails(items, { brand: res.brand, root: ROOT });
   for (const [id, views] of Object.entries(reports)) for (const [view, ps] of Object.entries(views)) for (const p of ps) fail(`${id} (${view}): ${p}`);
-  for (const s of shots) console.log(s.file.replace(ROOT, '.').replace(/\\/g, '/'));
-  console.log('Open shots/contact-light.png, contact-dark.png and contact-mobile.png first, then shots/<id>/*.png for the emails you changed.');
+  const rel = (f) => f.replace(ROOT, '.').replace(/\\/g, '/');
+  for (const s of shots.filter((x) => x.view !== 'all')) console.log(rel(s.file));
+  const sheets = shots.filter((x) => x.view === 'all');
+  if (ids.length) {
+    // One picture per email asked for: light, dark and phone side by side. Printed last.
+    console.log(`Open ${sheets.length === 1 ? 'this' : 'these'} and look at all three views (light, dark, phone):`);
+    for (const s of sheets) console.log(rel(s.file));
+  } else {
+    console.log('Open shots/contact-light.png, contact-dark.png and contact-mobile.png first, then shots/<id>/all.png (light, dark and phone side by side) for each email you changed.');
+  }
 } else if (cmd === 'contrast') {
   if (ids.length === 2) {
     const r = ratio(ids[0], ids[1]);
@@ -110,29 +119,12 @@ if (cmd === 'build') {
 } else if (cmd === 'new-email') {
   const id = ids[0];
   const marketing = args.includes('--marketing');
-  if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(id ?? '')) {
-    fail('usage: npm run new-email -- <kebab-case-id> [--marketing]');
-  } else if (existsSync(join(ROOT, 'emails', `${id}.mjml`))) {
-    fail(`emails/${id}.mjml already exists`);
-  } else {
-    const listFile = join(ROOT, 'emails.json');
-    const list = JSON.parse(readFileSync(listFile, 'utf8'));
-    list.emails.push({ id, type: marketing ? 'marketing' : 'transactional', subject: 'TODO subject for {{user.firstName}}', preheader: 'TODO: the line the inbox shows after the subject, 40-130 characters long.', about: 'TODO: when this email is sent.' });
-    writeFileSync(listFile, `${JSON.stringify(list, null, 2)}\n`);
-    writeFileSync(join(ROOT, 'emails', `${id}.mjml`), `{{!-- ${id}: TODO say when it is sent. Data: emails/${id}.props.json --}}
-<mj-section>
-  <mj-column>
-    <mj-text mj-class="h1"><h1 style="margin:0;font-size:30px;font-weight:400;">TODO heading</h1></mj-text>
-    <mj-text>Hi {{user.firstName}}, TODO the message.</mj-text>
-    {{> button url=actionUrl label="TODO what the button does"}}
-    {{> sign-off}}
-  </mj-column>
-</mj-section>
-`);
-    const props = { recipient: { email: 'maya.okafor@example.com' }, user: { firstName: 'Maya' }, actionUrl: 'https://app.pebblework.example/TODO' };
-    if (marketing) props.unsubscribeUrl = 'https://pebblework.example/email/unsubscribe?u=TODO';
-    writeFileSync(join(ROOT, 'emails', `${id}.props.json`), `${JSON.stringify(props, null, 2)}\n`);
+  try {
+    newEmail(ROOT, id, { marketing });
     console.log(`Created emails/${id}.mjml, emails/${id}.props.json and its emails.json entry (${marketing ? 'marketing' : 'transactional'}). Replace every TODO, then npm run preview -- ${id}.`);
+  } catch (e) {
+    if (!e.userFacing) throw e;
+    fail(e.message);
   }
 } else {
   fail(`unknown command "${cmd ?? ''}": build, preview, lint, contrast, images, new-email, render, browser`);

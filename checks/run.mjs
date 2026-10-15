@@ -142,7 +142,7 @@ await run.step('inspect', async () => {
       }
     }
   }
-  console.log(`${items.length} emails x light, dark, mobile measured; ${shots.length} screenshots, contact sheets in shots/contact-light.png, contact-dark.png, contact-mobile.png`);
+  console.log(`${items.length} emails x light, dark, mobile measured; ${shots.length} screenshots: shots/<id>/all.png (the three views side by side) per email, contact sheets in shots/contact-light.png, contact-dark.png, contact-mobile.png`);
   return ok;
 }, { render: true });
 

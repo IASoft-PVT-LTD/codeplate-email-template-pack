@@ -13,7 +13,7 @@ Use this when the user gives you a logo, product shots or illustrations for thei
 ## Steps
 
 1. Put the file in `assets/images/` with a short lowercase name (`spring-sale.jpg`).
-2. Add it to `assets.json`: `path`, `kind: "image"`, `width` and `height` in pixels (PNG sizes are checked), `use` (which email, shown at what size), `license` (`CodePlate-original` for their own, `CC0-1.0`), `credit`, and `source` (a link) for CC0. Add a line to `CREDITS.md`.
+2. Add it to `assets.json`: `path`, `kind: "image"`, `width` and `height` in pixels (PNG sizes are checked), `use` (which email, shown at what size), `license` and `credit` (files the user gave you: `"license": "user-owned"`, `credit`: their name or company; CC0 pictures: `CC0-1.0`, the artist, and `source`, a link). `CodePlate-original` is only for the pictures that came with the pack, credited "CodePlate". A new picture gets its own file name; don't reuse a sample's name such as `newsletter-hero.png`. Add a line to `CREDITS.md`.
 3. Use it: `<mj-image src="{{asset "spring-sale.jpg"}}" alt="Three planners in spring colours" width="528px" />`. Leave out `height` (a fixed height stretches it on phones). `href="…"` makes it a link: give the same link a text button too, as picture-only links vanish with images off.
 4. **Drawn from SVG:** keep the source as `assets/src/<name>.svg` (listed in `assets.json` with its viewBox size), add the PNG's entry with the pixel size you want, and run `npm run images` (or `npm run images -- <name>`). Edit the SVG, re-run, look at the PNG.
 5. **Hosting:** before the first real send, upload `assets/images/` to a public https folder (their website, a CDN, an S3 or R2 bucket) and set `brand.json` `assetBaseUrl` to it, ending in `/`. Every `{{asset}}` address then points there. The checks serve `assets/images/` locally under that address, so previews work before the upload.
@@ -21,5 +21,5 @@ Use this when the user gives you a logo, product shots or illustrations for thei
 ## Verify
 
 - `npm run check` ends with `CODEPLATE CHECKS: PASS` (`assets` checks the file and its size, `html` the alt text, width, format and that the file exists, `inspect` that it loads and isn't stretched).
-- `npm run preview -- <id>`; open `shots/<id>/light.png`, `dark.png` and `mobile.png`: sharp, not stretched, no white box around it in dark mode.
+- `npm run preview -- <id>`; open `shots/<id>/all.png` (light, dark and phone side by side): sharp, not stretched, no white box around it in dark mode.
 - After uploading, open one picture's address (`assetBaseUrl` + file) in a browser to confirm it's public.

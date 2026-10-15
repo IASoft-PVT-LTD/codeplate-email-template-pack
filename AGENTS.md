@@ -14,6 +14,7 @@ This folder turns short templates into emails that work in Gmail, Outlook, Apple
 
 ```
 npm run preview                   build + screenshots: shots/contact-light.png, contact-dark.png, contact-mobile.png, shots/<id>/*.png
+npm run preview -- <id>           one email; prints shots/<id>/all.png (light, dark, phone side by side) last
 npm run preview -- receipt        just one email
 npm run build                     out/<id>.html, .txt, .json, .eml for every email
 npm run lint                      the rules without a browser (instant)
@@ -58,7 +59,7 @@ Work in small steps: rebrand first (`rebrand.md`), remove the emails they don't 
 
 | Path | What lives there |
 |---|---|
-| `brand.json` | The **brand**: `name`, `url`, `assetBaseUrl` (where `assets/images/` is uploaded), `logo` (`file`, shown `width`/`height`), `supportEmail`, `address`, `lang`, `dir`, `locale`, `timeZone`, `fontFamily`, `headingFontFamily`, `width` (600), `radius`, and colours `light` and `dark` (`page`, `card`, `text`, `muted`, `primary`, `onPrimary`, `accent`, `border`, `panel`, `link`). Unknown settings fail the checks. |
+| `brand.json` | The **brand**: `name`, `url`, `assetBaseUrl` (where `assets/images/` is uploaded), `logo` (`file`, shown `width`/`height`), `supportEmail`, `address`, `lang`, `dir`, `locale`, `timeZone`, `fontFamily`, `headingFontFamily`, `width` (600), `radius`, `signOff` and `sender` (optional: how every email signs off), and colours `light` and `dark` (`page`, `card`, `text`, `muted`, `primary`, `onPrimary`, `accent`, `border`, `panel`, `link`). Unknown settings fail the checks. |
 | `emails.json` | Every email: `id`, `type` (`transactional` or `marketing`), `subject`, `preheader` (both may use `{{data}}`), `about` (when it's sent). |
 | `emails/<id>.mjml` | **The emails.** The inside of the layout: `mj-section`s with the content. Uses the partials and the `mj-class`es the layout defines. |
 | `emails/<id>.props.json` | Each email's preview data: every value its placeholders use. Your app passes the same shape. |
@@ -96,13 +97,13 @@ After every change:
    - `emails`: `brand.json`, `emails.json` and `emails/` agree (settings, colours, each email's `.mjml` and `.props.json`, marketing emails have `unsubscribeUrl`)
    - `unit`: `node --test tests/`
    - `build`: every email renders with its data, with no MJML errors, into `out/`
-   - `html`: under 102 KB; `lang`, charset, viewport; dark-mode meta tags and styles; no tags or CSS mail apps drop; images https + PNG/JPG/GIF + alt + width + the file exists; links https/mailto/tel with real text and an inline colour; layout tables `role="presentation"`; marketing: unsubscribe link and address; subject and preheader; no `{{`, `undefined` or `TODO` left
+   - `html`: under 102 KB; `lang`, charset, viewport; dark-mode meta tags and styles; no tags or CSS mail apps drop; images https + PNG/JPG/GIF + alt + width + the file exists; links https/mailto/tel with real text and an inline colour; layout tables `role="presentation"`; marketing: unsubscribe link and address; subject and preheader; no `{{`, `undefined` or `TODO` left; a warning (not a failure) when an email types out `brand.json`'s address or support email instead of `{{brand.address}}`, `{{brand.supportEmail}}`
    - `text`: the plain-text version has the whole message and every link, and no markup
-   - `inspect`: each email in the browser in light (680 px), dark and on a 375 px phone: pictures load, keep their shape and don't vanish into the colour behind them (a dark cut-out logo on the dark page), WCAG AA contrast for every piece of text in light **and** dark, inline colours and fonts, text ≥ 12 px, no sideways scrolling, buttons ≥ 40 px tall, nothing loaded from outside `assets/`; screenshots and contact sheets in `shots/`
+   - `inspect`: each email in the browser in light (680 px), dark and on a 375 px phone: pictures load, keep their shape and don't vanish into the colour behind them (a dark cut-out logo on the dark page), WCAG AA contrast for every piece of text in light **and** dark, inline colours and fonts, text ≥ 12 px, no sideways scrolling, buttons ≥ 40 px tall, nothing loaded from outside `assets/`; screenshots, `shots/<id>/all.png` per email and contact sheets in `shots/`
    - `credit`, then `budget` (under the 90 seconds in `codeplate.json`)
 
    While you work, `npm run lint` (instant) and `npm run preview -- <id>` are fine. Then the full check before you report. A failing step repeats the end of its output above the summary.
-2. **Look at the emails.** Open the three contact sheets, then the PNGs of every email you changed (**Seeing your work**). The checks can't judge copy, hierarchy or whether it looks like the user's brand; you can.
+2. **Look at the emails.** Open the three contact sheets, then `shots/<id>/all.png` of every email you changed: light, dark and phone side by side in one picture, so none of the three gets skipped (**Seeing your work**). The checks can't judge copy, hierarchy or whether it looks like the user's brand; you can.
 3. **Tell the user** what changed, show the screenshots, and give the file paths (`out/<id>.html`/`.txt` to send, `out/<id>.eml` to open in their own mail app). Say what the checks can't see: Gmail's and Outlook.com's own dark mode, Outlook for Windows' layout engine, and their sending service's changes (see **What the checks can't see**). Suggest they send themselves a test from their sending service before the first real send.
 
 ## Recipes
@@ -129,11 +130,12 @@ You can't open an inbox, but you can look at every email the way three readers w
 ```
 npm run preview                   → shots/contact-light.png, contact-dark.png, contact-mobile.png
                                     shots/<id>/light.png, dark.png, mobile.png (full length)
-npm run preview -- newsletter     just that email
+                                    shots/<id>/all.png (the three side by side)
+npm run preview -- newsletter     just that email; prints shots/newsletter/all.png last
 ```
 
 - **Open the contact sheets first**: all emails side by side, in light, in dark and at phone width. Check they look like one family (same header, footer, buttons, spacing), that nothing looks unlike the rest, and that dark mode reads as dark everywhere.
-- **Then open each email you changed** at full size: copy, wrapping, button labels, table columns, picture crops, the footer. In `dark.png`, look for pictures with white boxes around them and logos that vanish; on `mobile.png`, for columns that stack in a sensible order and tables that still fit.
+- **Then open `shots/<id>/all.png` for each email you changed** (light, dark and phone in one picture; the single PNGs are there for a closer look): copy, wrapping, button labels, table columns, picture crops, the footer. In `dark.png`, look for pictures with white boxes around them and logos that vanish; on `mobile.png`, for columns that stack in a sensible order and tables that still fit.
 - **The real thing:** `out/<id>.eml` opens in Outlook, Apple Mail or Thunderbird on this computer (double-click it), with the pictures attached, so the user can see their own mail app's rendering without sending anything. `out/<id>.txt` is what people who read plain text get.
 - `out/<id>.json` holds the subject, preheader, headers and sizes; read it to check what the inbox list will show.
 

@@ -4,7 +4,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT } from './render.mjs';
 
-export const BRAND_KEYS = ['name', 'url', 'assetBaseUrl', 'logo', 'supportEmail', 'address', 'lang', 'dir', 'locale', 'timeZone', 'fontFamily', 'headingFontFamily', 'width', 'radius', 'light', 'dark'];
+export const BRAND_KEYS = ['name', 'url', 'assetBaseUrl', 'logo', 'supportEmail', 'address', 'lang', 'dir', 'locale', 'timeZone', 'fontFamily', 'headingFontFamily', 'width', 'radius', 'light', 'dark', 'signOff', 'sender'];
 export const COLOUR_KEYS = ['page', 'card', 'text', 'muted', 'primary', 'onPrimary', 'accent', 'border', 'panel', 'link'];
 export const EMAIL_KEYS = ['id', 'type', 'subject', 'preheader', 'about'];
 export const TYPES = ['transactional', 'marketing'];
@@ -21,6 +21,10 @@ const tryJson = (file, problems) => {
 export function checkBrand(brand) {
   const problems = [];
   for (const k of Object.keys(brand)) if (!BRAND_KEYS.includes(k)) problems.push(`brand.json: unknown setting "${k}" (known: ${BRAND_KEYS.join(', ')})`);
+  // Optional: the closing line and the sender's name every email's sign-off uses (partials/sign-off.mjml).
+  for (const k of ['signOff', 'sender']) {
+    if (brand[k] !== undefined && (typeof brand[k] !== 'string' || !brand[k].trim())) problems.push(`brand.json: "${k}" must be text (or leave it out)`);
+  }
   for (const k of ['name', 'url', 'assetBaseUrl', 'supportEmail', 'address', 'lang', 'fontFamily']) {
     if (typeof brand[k] !== 'string' || !brand[k].trim()) problems.push(`brand.json: "${k}" is required`);
   }

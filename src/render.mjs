@@ -66,12 +66,21 @@ export function createHandlebars(brand, root = ROOT) {
     const digits = fmt.resolvedOptions().maximumFractionDigits;
     return fmt.format(amount / 10 ** digits);
   });
-  // {{date "2026-10-14"}} → 14 October 2026; {{date sentAt "datetime"}} → 14 Oct 2026, 09:30.
+  // {{date "2026-10-14"}} → 14 October 2026; {{date sentAt "datetime"}} → 14 Oct 2026, 09:30;
+  // {{date at "fulldatetime"}} → Tuesday 3 November 2026 at 09:30; {{date at "time"}} → 09:30.
+  // Also "full", "long" (the default), "medium" and "short" for the date alone; an unknown
+  // style gives "long". Written in brand.json's locale and time zone (the examples: en-IE,
+  // Europe/Dublin).
   // Dates come from the data, never the clock, so the same data gives the same email.
+  const DATE_STYLES = {
+    datetime: { dateStyle: 'medium', timeStyle: 'short' },
+    fulldatetime: { dateStyle: 'full', timeStyle: 'short' },
+    time: { timeStyle: 'short' },
+  };
   hb.registerHelper('date', (iso, style) => {
     const d = new Date(iso);
     if (typeof iso !== 'string' || Number.isNaN(d.getTime())) throw new Error(`{{date}} needs an ISO date like "2026-10-14", got ${JSON.stringify(iso)}`);
-    const opts = typeof style === 'string' && style === 'datetime' ? { dateStyle: 'medium', timeStyle: 'short' }
+    const opts = typeof style === 'string' && Object.hasOwn(DATE_STYLES, style) ? DATE_STYLES[style]
       : { dateStyle: typeof style === 'string' && ['full', 'long', 'medium', 'short'].includes(style) ? style : 'long' };
     return new Intl.DateTimeFormat(locale, { ...opts, timeZone }).format(d);
   });

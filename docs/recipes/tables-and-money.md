@@ -6,7 +6,7 @@ Use this for anything with line items, amounts, tax or dates: the receipt, an in
 
 - **The email shows amounts; it never works them out.** The billing system (Stripe, Paddle, their shop) knows the real totals, tax and rounding. Pass them in the data: `subtotal`, `tax`, `total`, each line's `amount`.
 - **Amounts are whole minor units** (pence, cents: `5880` = £58.80) with a currency code; `{{money amount "GBP"}}` formats them in `brand.json` `locale`. Decimal amounts (`58.8`) throw, because floating-point money goes wrong. Currencies without minor units (JPY) work: `{{money 1200 "JPY"}}` → JP¥1,200 in `en-GB` (¥1,200 in `ja-JP`).
-- **Dates are ISO strings** in the data (`"2026-10-14"` or `"2026-10-14T08:42:00Z"`), formatted by `{{date x}}` (`14 October 2026`), `{{date x "datetime"}}` (`14 Oct 2026, 09:42`), `"full"`, `"medium"` or `"short"`, in `brand.json` `timeZone`. Never "today": the email must say what the data says.
+- **Dates are ISO strings** in the data (`"2026-10-14"` or `"2026-10-14T08:42:00Z"`), formatted by `{{date x}}` (`14 October 2026`), `{{date x "datetime"}}` (`14 Oct 2026, 09:42`), `{{date x "fulldatetime"}}` (`Wednesday 14 October 2026 at 09:42`, for bookings and appointments), `{{date x "time"}}` (`09:42`), `"full"`, `"medium"` or `"short"`, in `brand.json` `locale` and `timeZone` (the exact words follow the locale: `en-US` writes `Wednesday, October 14, 2026 at 9:42 AM`). Don't add a style to `src/render.mjs` for one email; if none fits, ask. Never "today": the email must say what the data says.
 
 ## Steps: a table
 

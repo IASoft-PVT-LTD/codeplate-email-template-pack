@@ -32,7 +32,7 @@ emails/<id>.mjml ── wrapped in partials/layout.mjml ── Handlebars (stric
 | `subject`, `preheader` | filled from `emails.json` (the layout uses them for `<title>` and the hidden preview text) |
 | `marketing` | `true` for `type: "marketing"` |
 | `email` | `{ id, type }` |
-| `sender`, `signOff` | optional, used by `partials/sign-off.mjml` ("Thanks," / "The {{brand.name}} team" otherwise) |
+| `sender`, `signOff` | optional, used by `partials/sign-off.mjml`; without them, `brand.json` `sender` and `signOff`, and without those "Thanks," / "The {{brand.name}} team" |
 
 ## Helpers
 
@@ -40,7 +40,7 @@ emails/<id>.mjml ── wrapped in partials/layout.mjml ── Handlebars (stric
 |---|---|---|
 | `asset` | `{{asset "parcel.png"}}` | `brand.assetBaseUrl` + file: the public address of a file in `assets/images/` |
 | `money` | `{{money 5880 "GBP"}}` | `£58.80` in `brand.locale`; amounts are whole minor units; floats throw |
-| `date` | `{{date "2026-10-14"}}`, `{{date at "datetime"}}`, `{{date d "full"}}` | `14 October 2026`, `14 Oct 2026, 09:42`, `Friday, 16 October 2026`, in `brand.locale` and `brand.timeZone` |
+| `date` | `{{date "2026-10-14"}}`, `{{date at "datetime"}}`, `{{date at "fulldatetime"}}`, `{{date at "time"}}`, `{{date d "full"}}` | `14 October 2026`, `14 Oct 2026, 09:42`, `Wednesday 14 October 2026 at 09:42`, `09:42`, `Friday, 16 October 2026`, in `brand.locale` and `brand.timeZone` (also `"medium"`, `"short"`; an unknown style gives the long date) |
 | `plural` | `{{plural 3 "day" "days"}}` | `3 days` |
 | `eq` | `{{#if (eq status "late")}}` | a comparison for `#if` |
 

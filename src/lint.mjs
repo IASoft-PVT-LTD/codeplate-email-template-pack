@@ -4,7 +4,9 @@
 //   checkHtml(html, ctx)   size (Gmail clips over 102 KB), <head> basics and dark-mode meta,
 //                          elements and CSS mail apps drop, images (https, PNG/JPG/GIF, alt,
 //                          width, the file exists), links (https/mailto/tel, real text),
-//                          tables (layout tables role="presentation"), marketing footer
+//                          tables (layout tables role="presentation"), marketing footer;
+//                          warns when emails/<id>.mjml types out brand.json's address or
+//                          support email instead of using {{brand.address}}, {{brand.supportEmail}}
 //   checkText(text, ctx)   the plain-text version: present, readable, every link of the HTML,
 //                          no markup or template leftovers, short lines
 //   checkMeta(rendered)    subject and preheader
@@ -175,7 +177,21 @@ export function checkHtml(html, { brand, meta, data = {}, root }) {
     else if (data.unsubscribeUrl && unsub.href !== data.unsubscribeUrl) problems.push(`the Unsubscribe link goes to ${unsub.href}, not the unsubscribeUrl in the data (${data.unsubscribeUrl})`);
     if (brand.address && !bodyText.includes(brand.address)) problems.push('marketing email without the postal address from brand.json (required by CAN-SPAM and similar laws)');
   }
+  if (root && meta.id) warnings.push(...retypedBrand(root, meta.id, brand));
   return { problems, warnings, bytes, links };
+}
+
+// Brand details typed into an email's MJML: they go stale when brand.json changes.
+export function retypedBrand(root, id, brand) {
+  const file = join(root, 'emails', `${id}.mjml`);
+  if (!existsSync(file)) return [];
+  const source = readFileSync(file, 'utf8');
+  const warnings = [];
+  for (const key of ['address', 'supportEmail']) {
+    const value = typeof brand[key] === 'string' ? brand[key].trim() : '';
+    if (value && source.includes(value)) warnings.push(`emails/${id}.mjml types out brand.json's ${key} ("${value}"): write {{brand.${key}}} so it follows brand.json`);
+  }
+  return warnings;
 }
 
 // The plain-text version.

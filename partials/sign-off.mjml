@@ -1,2 +1,3 @@
-{{!-- The closing line and the sender's name. --}}
-<mj-text padding="18px 36px 34px">{{#if signOff}}{{signOff}}{{else}}Thanks,{{/if}}<br>{{#if sender}}{{sender}}{{else}}The {{@root.brand.name}} team{{/if}}</mj-text>
+{{!-- The closing line and the sender's name: the email's own signOff and sender (from its
+     data), else brand.json "signOff" and "sender", else "Thanks," and "The <brand> team". --}}
+<mj-text padding="18px 36px 34px">{{#if signOff}}{{signOff}}{{else if @root.brand.signOff}}{{@root.brand.signOff}}{{else}}Thanks,{{/if}}<br>{{#if sender}}{{sender}}{{else if @root.brand.sender}}{{@root.brand.sender}}{{else}}The {{@root.brand.name}} team{{/if}}</mj-text>

@@ -3,7 +3,7 @@
   "spec": 0,
   "id": "email-template-pack",
   "name": "Email Template Pack",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "kind": "document",
   "summary": "Ten transactional and newsletter emails (MJML) with plain-text versions, dark mode, checks for Gmail's size limit, and screenshots.",
   "tags": [

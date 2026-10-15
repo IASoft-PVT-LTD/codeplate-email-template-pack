@@ -23,7 +23,7 @@ An email file (`emails/<id>.mjml`) is a list of `mj-section`s (rows; each is a w
 | Two columns (stack on phones) | two `mj-column`s in one `mj-section` |
 | Side by side even on phones | `mj-column`s inside `<mj-group>` (small items only) |
 | A table of items | `tables-and-money.md` |
-| The closing lines | `{{> sign-off}}` (`signOff`, `sender` in the data change them) |
+| The closing lines | `{{> sign-off}}` (`signOff`, `sender` in the data change them for this email; `brand.json` `signOff`, `sender` for every email) |
 
 ## Steps
 
@@ -36,5 +36,5 @@ An email file (`emails/<id>.mjml`) is a list of `mj-section`s (rows; each is a w
 ## Verify
 
 - `npm run lint` while editing (instant), then `npm run check` ends with `CODEPLATE CHECKS: PASS`.
-- `npm run preview -- <id>`; open `shots/<id>/light.png`, `dark.png` and `mobile.png`: the copy reads well, one clear button, nothing cramped on the phone, dark mode consistent.
+- `npm run preview -- <id>`; open `shots/<id>/all.png` (the last line it prints: light, dark and phone side by side): the copy reads well, one clear button, nothing cramped on the phone, dark mode consistent.
 - Read `out/<id>.txt`: the plain-text version says the same and has every link.

@@ -6,7 +6,8 @@
 //   mobile (375 px): no sideways scrolling, buttons tall enough to tap
 //   all    pictures keep their shape, and no cut-out picture (a logo) vanishes into the colour
 //          behind it; nothing is loaded from outside assets/images/
-// and takes the screenshots: shots/<id>/light.png, dark.png, mobile.png, plus contact sheets.
+// and takes the screenshots: shots/<id>/light.png, dark.png, mobile.png, the three side by side
+// in shots/<id>/all.png (the one picture to open after changing an email), plus contact sheets.
 //
 // What this can't tell you: how Gmail's apps and Outlook.com recolour emails in their own dark
 // mode, or how Outlook for Windows (Word's engine) lays tables out. See README "What the checks
@@ -214,11 +215,37 @@ export async function inspectEmails(items, { brand, root = ROOT, screenshots = t
       }
       await context.close();
     }
-    if (screenshots) shots.push(...await contactSheets(browser, items.map((i) => i.id), root));
+    if (screenshots) {
+      for (const { id } of items) shots.push(await sideBySide(browser, id, root));
+      shots.push(...await contactSheets(browser, items.map((i) => i.id), root));
+    }
   } finally {
     await browser.close();
   }
   return { reports, shots };
+}
+
+// shots/<id>/all.png: the light, dark and phone screenshots of one email side by side, at
+// full size, each under its label.
+export const ALL_GAP = 24;
+async function sideBySide(browser, id, root) {
+  const views = Object.entries(VIEWS).map(([view, opts]) => ({
+    view, width: opts.width,
+    label: { light: 'Light, 680 px', dark: 'Dark mode (as Apple Mail shows it), 680 px', mobile: 'Phone, 375 px' }[view] ?? view,
+    src: `data:image/png;base64,${readFileSync(join(root, 'shots', id, `${view}.png`)).toString('base64')}`,
+  }));
+  const width = views.reduce((s, v) => s + v.width, 0) + ALL_GAP * (views.length + 1);
+  const page = await browser.newPage({ viewport: { width, height: 400 } });
+  await page.setContent(`<!doctype html><html><head><style>
+    body{margin:0;padding:${ALL_GAP}px;background:#e9e6df;font:600 14px system-ui,sans-serif;color:#333}
+    .row{display:flex;gap:${ALL_GAP}px;align-items:flex-start}p{margin:0 0 8px}
+    img{display:block;border:1px solid rgba(128,128,128,.4)}
+  </style></head><body><p>${id}</p><div class="row">${views.map((v) => `<div style="width:${v.width}px"><p>${v.label}</p><img src="${v.src}" width="${v.width}"></div>`).join('')}</div></body></html>`);
+  await page.evaluate(async () => Promise.all([...document.images].map((i) => (i.complete ? null : new Promise((r) => { i.onload = r; })))));
+  const file = join(root, 'shots', id, 'all.png');
+  writeFileSync(file, await page.screenshot({ fullPage: true }));
+  await page.close();
+  return { id, view: 'all', file };
 }
 
 // One sheet per view: every email side by side, scaled down, with its id. Open these first.

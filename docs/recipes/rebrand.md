@@ -4,12 +4,12 @@ Use this first, when the user's brand replaces Pebblework's, or when their brand
 
 ## Steps
 
-1. **Sender details** in `brand.json`: `name`, `url` (their website, https), `supportEmail` (where replies and questions go), `address` (one line: company, street, town, postcode, country; marketing emails must show it). Keep `lang`, `locale` and `timeZone` for now (`languages.md` changes them).
+1. **Sender details** in `brand.json`: `name`, `url` (their website, https), `supportEmail` (where replies and questions go), `address` (one line: company, street, town, postcode, country; marketing emails must show it). How every email signs off: `signOff` ("Thanks," by default) and `sender` ("The <name> team" by default), e.g. `"sender": "Niamh and the workshop crew"`; one email can still pass its own `signOff` or `sender` in its data. Don't edit `partials/sign-off.mjml` for this. Keep `lang`, `locale` and `timeZone` for now (`languages.md` changes them).
 
 2. **Logo.** Email needs a PNG (Gmail and Outlook don't show SVG):
    - They have an SVG: save it as `assets/src/logo.svg` (replacing Pebblework's), then `npm run images`, which draws `assets/images/logo.png` at the size `assets.json` gives it (88x88 for a 44 px mark).
    - They have a PNG or JPG: put it in `assets/images/` at twice the size it is shown (a 44 px tall mark → 88 px), and remove `assets/src/logo.svg` and its `assets.json` entry.
-   - Set `brand.json` `logo`: `file`, and the `width` and `height` it is shown at. Update its `assets.json` entry (pixel size, `use`, `license: "CodePlate-original"`, `credit`: their company) and `CREDITS.md`.
+   - Set `brand.json` `logo`: `file`, and the `width` and `height` it is shown at. Update its `assets.json` entry (pixel size, `use`, `license: "user-owned"`, `credit`: their company) and `CREDITS.md`. Files the user gave you are always `license: "user-owned"` with their name or company as `credit`; `CodePlate-original` stays only on Pebblework's pictures you keep, credited "CodePlate", and the `assets` check refuses it with any other credit.
    - The header shows the logo **and the name as text** (`partials/header.mjml`), so the logo is marked decorative. A wordmark-only logo: show it bigger, give it `alt="{{brand.name}}"` without `role="presentation"`, and remove the `<span>` with the name.
    - **Dark mode:** the logo sits on `page` in light and `dark.page` in dark. A dark logo on a transparent background vanishes in dark mode (the `inspect` check fails with "vanishes in dark mode"); give it a solid background shape (like Pebblework's rounded square) or a light outline in the SVG, and redraw. Look at `shots/*/dark.png`.
 

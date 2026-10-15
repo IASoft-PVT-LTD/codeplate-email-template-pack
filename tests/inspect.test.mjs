@@ -1,10 +1,11 @@
 // Needs a browser (the same one the checks use); skipped when none is found.
 import assert from 'node:assert/strict';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import test from 'node:test';
 import { findTool } from '../checks/shared/find-tool.mjs';
-import { inspectEmails } from '../src/inspect.mjs';
+import { pngSize } from '../checks/shared/assets.mjs';
+import { inspectEmails, VIEWS } from '../src/inspect.mjs';
 import { renderImages } from '../src/images.mjs';
 import { renderEmail } from '../src/render.mjs';
 import { BODY, DATA, makeProject } from './helpers.mjs';
@@ -48,4 +49,18 @@ test('the frame and a simple email pass in light, dark and on a phone', { skip: 
   const r = await renderEmail('report', DATA, { root: dir });
   const { reports } = await inspectEmails([{ id: 'report', html: r.html }], { brand, root: dir, screenshots: false });
   assert.deepEqual(reports.report, { light: [], dark: [], mobile: [] });
+});
+
+test('preview writes shots/<id>/all.png: light, dark and phone side by side', { skip: !hasBrowser && 'no browser found' }, async () => {
+  const { dir, brand } = makeProject();
+  const r = await renderEmail('report', DATA, { root: dir });
+  const { shots } = await inspectEmails([{ id: 'report', html: r.html }], { brand, root: dir });
+  const file = join(dir, 'shots', 'report', 'all.png');
+  assert.ok(existsSync(file));
+  assert.ok(shots.some((s) => s.view === 'all' && s.file === file));
+  const all = pngSize(readFileSync(file));
+  const views = Object.values(VIEWS).reduce((s, v) => s + v.width, 0);
+  assert.ok(all.width >= views, `all.png is ${all.width}px wide, the three views ${views}px`);
+  const light = pngSize(readFileSync(join(dir, 'shots', 'report', 'light.png')));
+  assert.ok(all.height >= light.height);
 });

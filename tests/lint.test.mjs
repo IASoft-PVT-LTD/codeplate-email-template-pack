@@ -97,3 +97,16 @@ test('subject and preheader', () => {
   assert.match(checkMeta({ subject: 'x'.repeat(120), preheader: 'x'.repeat(50) }).problems.join(), /under 70/);
   assert.equal(checkMeta({ subject: 'x'.repeat(80), preheader: 'x'.repeat(50) }).warnings.length, 1);
 });
+
+test('brand details typed into an email are a warning, not a failure', async () => {
+  const { brand } = makeProject();
+  const body = `<mj-section><mj-column><mj-text>Find us at ${brand.address}. Questions: ${brand.supportEmail}</mj-text>{{> sign-off}}</mj-column></mj-section>`;
+  const s = await sample({ body });
+  const r = checkHtml(s.html, s.ctx);
+  assert.deepEqual(r.problems, []);
+  const w = r.warnings.join('\n');
+  assert.match(w, /emails\/report\.mjml types out brand\.json's address/);
+  assert.match(w, /\{\{brand\.supportEmail\}\}/);
+  const fine = await sample({ body: '<mj-section><mj-column><mj-text>Find us at {{brand.address}}.</mj-text></mj-column></mj-section>' });
+  assert.doesNotMatch(checkHtml(fine.html, fine.ctx).warnings.join('\n'), /types out/);
+});

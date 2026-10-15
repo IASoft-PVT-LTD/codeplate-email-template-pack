@@ -64,3 +64,30 @@ test('data tables become aligned columns in the plain text', async () => {
   const r = await renderEmail('report', { ...DATA, items: [{ name: 'Seats', amount: 900 }, { name: 'Storage', amount: 100 }] }, { root: dir });
   assert.match(r.text, /Item\s+Amount\nSeats\s+€9\.00\nStorage\s+€1\.00/);
 });
+
+test('date styles with the time, in the brand locale and time zone', async () => {
+  const body = '<mj-section><mj-column><mj-text>A:{{date at "fulldatetime"}}|B:{{date summer "fulldatetime"}}|C:{{date at "time"}}|D:{{date at "nonsense"}}</mj-text></mj-column></mj-section>';
+  const data = { ...DATA, at: '2026-11-03T09:30:00Z', summer: '2026-07-14T09:30:00Z' };
+  const { dir } = makeProject({ body, data, brand: { locale: 'en-IE', timeZone: 'Europe/Dublin' } });
+  const r = await renderEmail('report', data, { root: dir });
+  const text = r.text.replace(/\s+/g, ' '); // the plain text wraps long lines
+  assert.match(text, /A:Tuesday 3 November 2026 at 09:30\|/);
+  assert.match(text, /B:Tuesday 14 July 2026 at 10:30\|/, 'summer time is UTC+1 in Dublin');
+  assert.match(text, /C:09:30\|/);
+  assert.match(text, /D:3 November 2026/, 'an unknown style falls back to long');
+  const us = makeProject({ body, data, brand: { locale: 'en-US', timeZone: 'America/New_York' } });
+  const u = await renderEmail('report', data, { root: us.dir });
+  assert.match(u.text.replace(/\s+/g, ' '), /A:Tuesday, November 3, 2026 at 4:30\sAM\|/);
+});
+
+test('the sign-off: the email\'s own data, then brand.json, then the default', async () => {
+  const plain = makeProject();
+  const d = await renderEmail('report', DATA, { root: plain.dir });
+  assert.match(d.text, /Thanks,\s+The Pebblework team/);
+  const branded = makeProject({ brand: { signOff: 'See you soon,', sender: 'Niamh and the workshop crew' } });
+  const b = await renderEmail('report', DATA, { root: branded.dir });
+  assert.match(b.text, /See you soon,\s+Niamh and the workshop crew/);
+  const own = await renderEmail('report', { ...DATA, sender: 'Ciarán' }, { root: branded.dir });
+  assert.match(own.text, /See you soon,\s+Ciarán/);
+  assert.doesNotMatch(own.text, /workshop crew/);
+});
