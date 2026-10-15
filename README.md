@@ -1,6 +1,6 @@
 # Email Template Pack
 
-> **Free CodePlate template, v1.0.0.** This repository mirrors the zip on [codeplate.io](https://codeplate.io/t/email-template-pack/).
+> **Free CodePlate template, v1.0.1.** This repository mirrors the zip on [codeplate.io](https://codeplate.io/t/email-template-pack/).
 > Press **Use this template** to start your own repository from it, or [download the zip](https://codeplate.io/t/email-template-pack/).
 > [All templates](https://codeplate.io/) · [Free License](https://codeplate.io/license/free/) · subscribers get it under the [Pro License](https://codeplate.io/license/pro/) with no credit.
 
